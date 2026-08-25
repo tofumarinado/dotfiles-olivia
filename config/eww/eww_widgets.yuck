@@ -59,9 +59,8 @@
 )
 
 (defwidget audio []
-  (box :orientation "vertical" :class "audio-popup" :spacing 10
-    (label :class "audio-title" :halign "start" :text "Output Device")
-    (box :orientation "horizontal" :class "audio-volume-row" :spacing 8
+  (box :orientation "vertical" :class "audio-popup" :spacing 6
+    (box :orientation "horizontal" :class "audio-volume-row" :spacing 4
       (button :class "mute-button" :onclick "~/.config/eww/scripts/toggle_mute.sh"
         (label :class "mute-icon" :text {MUTED == "true" ? "🔇" : "🔊"})
       )
@@ -69,13 +68,13 @@
              :onchange "~/.config/eww/scripts/set_volume.sh {}")
       (label :class "volume-value" :text "${VOLUME}%")
     )
-    (box :orientation "vertical" :class "sink-list" :spacing 6
+    (box :orientation "vertical" :class "sink-list" :spacing 4
       (for sink in SINKS
         (button :class {sink.active ? "sink-button active" : "sink-button"}
                 :onclick "~/.config/eww/scripts/set_sink.sh '${sink.name}'"
-          (box :orientation "horizontal" :spacing 8 :halign "start"
+          (box :orientation "horizontal" :spacing 6 :halign "start"
             (label :class "sink-indicator" :text {sink.active ? "●" : "○"})
-            (label :class "sink-label" :text "${sink.description}")
+            (label :class "sink-label" :limit-width "18" :text "${sink.description}")
           )
         )
       )

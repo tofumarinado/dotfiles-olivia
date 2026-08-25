@@ -71,9 +71,9 @@
   :focusable true
   :namespace "eww"
   :geometry (geometry
-    :x "120"
-    :y "55"
-    :width "300"
+    :x "200"
+    :y "5"
+    :width "180"
     :anchor "top right")
   (audio)
 )
