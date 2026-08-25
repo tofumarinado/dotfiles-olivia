@@ -21,6 +21,7 @@ set $menu wofi --show drun
 set $file_explorer nautilus
 
 exec_always ~/.config/eww/scripts/start.sh
+exec nm-applet --indicator
 
 ### Output configuration
 #

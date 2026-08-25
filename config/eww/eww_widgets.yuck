@@ -1,0 +1,84 @@
+(include "eww_vars.yuck")
+
+(defwidget daybox []
+  (box :height "75" :width "75" :halign "center" :valign "center" :class "container"
+    (label :class "label"  :text DAY)
+  )
+)
+
+(defwidget monthbox []
+  (box :height "75" :width "75" :halign "center" :valign "center" :class "container"
+    (label :class "label"  :text MONTH)
+  )
+)
+
+(defwidget yearbox []
+  (box :height "75" :width "75" :halign "center" :valign "center" :class "container"
+    (label :class "label"  :text YEAR)
+  )
+)
+
+(defwidget userinfobox []
+  (centerbox :height "75" :width "255" :halign "center" :valign "center" :class "userinfo-parent"
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "kitty & disown" :class "button"
+        (label :class "icon-label"  :text "⌘")
+      )
+    )
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "GTK_THEME=diinki-retro-dark nautilus & disown"  :class "button"
+        (label :class "icon-label"  :text "🗀")
+      )
+    )
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "eww open powermenu" :class "button"
+        (label :class "icon-label"  :text "⭘")
+      )
+    )
+  )
+)
+
+(defwidget powermenu []
+  (centerbox :height "75" :width "255" :halign "center" :valign "center" :class "userinfo-parent"
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "systemctl poweroff" :class "poweroff-button"
+        (label :class "icon-label"  :text "⏻")
+      )
+    )
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "systemctl suspend"  :class "suspend-button"
+        (label :class "icon-label"  :text "⏾")
+      )
+    )
+    (box :height "75" :width "85" :halign "center" :valign "center" :class "userinfo-child"
+      (button :onclick "eww close powermenu" :class "button"
+        (label :class "icon-label"  :text "⨯")
+      )
+    )
+  )
+)
+
+(defwidget audio []
+  (box :orientation "vertical" :class "audio-popup" :spacing 10
+    (label :class "audio-title" :halign "start" :text "Output Device")
+    (box :orientation "horizontal" :class "audio-volume-row" :spacing 8
+      (button :class "mute-button" :onclick "~/.config/eww/scripts/toggle_mute.sh"
+        (label :class "mute-icon" :text {MUTED == "true" ? "🔇" : "🔊"})
+      )
+      (scale :min 0 :max 150 :round-digits 0 :value VOLUME
+             :onchange "~/.config/eww/scripts/set_volume.sh {}")
+      (label :class "volume-value" :text "${VOLUME}%")
+    )
+    (box :orientation "vertical" :class "sink-list" :spacing 6
+      (for sink in SINKS
+        (button :class {sink.active ? "sink-button active" : "sink-button"}
+                :onclick "~/.config/eww/scripts/set_sink.sh '${sink.name}'"
+          (box :orientation "horizontal" :spacing 8 :halign "start"
+            (label :class "sink-indicator" :text {sink.active ? "●" : "○"})
+            (label :class "sink-label" :text "${sink.description}")
+          )
+        )
+      )
+    )
+  )
+)

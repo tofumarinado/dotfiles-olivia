@@ -1,0 +1,10 @@
+; sup cuh
+
+(defpoll DAY :interval "1s" '~/.config/eww/scripts/day_format.sh')
+(defpoll MONTH :interval "1s" '~/.config/eww/scripts/month_format.sh')
+(defpoll YEAR :interval "1s" '~/.config/eww/scripts/year_format.sh')
+
+; audio popup state
+(defpoll VOLUME :interval "1s" :initial "0" '~/.config/eww/scripts/get_volume.sh')
+(defpoll MUTED :interval "1s" :initial "false" '~/.config/eww/scripts/get_muted.sh')
+(defpoll SINKS :interval "3s" :initial "[]" '~/.config/eww/scripts/get_sinks.sh')

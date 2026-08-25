@@ -10,16 +10,17 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 
-Each top-level directory is a stow "package" that mirrors the home directory structure:
+All app configs live under `config/`, mirroring `~/.config`. The `themes` directory maps to `~/.themes`.
 
 ```
 dotfiles-olivia/
-├── sway/        → ~/.config/sway/
-├── waybar/      → ~/.config/waybar/
-├── kitty/       → ~/.config/kitty/
-├── wofi/        → ~/.config/wofi/
-├── eww/         → ~/.config/eww/
-└── themes/      → ~/.themes/
+├── config/
+│   ├── eww/    → ~/.config/eww/
+│   ├── kitty/  → ~/.config/kitty/
+│   ├── sway/   → ~/.config/sway/
+│   ├── waybar/ → ~/.config/waybar/
+│   └── wofi/   → ~/.config/wofi/
+└── themes/     → ~/.themes/
 ```
 
 ---
@@ -39,24 +40,24 @@ dotfiles-olivia/
 git clone <your-repo-url> ~/source/dotfiles-olivia
 cd ~/source/dotfiles-olivia
 
-# 2. Stow all packages at once
-stow --target=$HOME sway waybar kitty wofi eww themes
+# 2. Stow everything
+stow --target=$HOME config themes
 ```
 
 This will create symlinks from your home directory into this repo for every config file.
 
-### Stowing individual packages
+### Stowing individual apps
 
 ```bash
-stow --target=$HOME sway      # just sway
-stow --target=$HOME waybar    # just waybar
+stow --target=$HOME/.config config/sway      # just sway
+stow --target=$HOME/.config config/waybar    # just waybar
 # etc.
 ```
 
 ### Removing symlinks
 
 ```bash
-stow --delete --target=$HOME sway waybar kitty wofi eww themes
+stow --delete --target=$HOME config themes
 ```
 
 ---
